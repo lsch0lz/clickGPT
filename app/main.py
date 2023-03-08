@@ -13,7 +13,8 @@ from app.src.auth.authentication import (
 )
 from app.src.auth.config import db, ACCESS_TOKEN_EXPIRE_MINUTES
 from app.src.auth.schemas import Token, User
-from app.src.posts.schemas import Question, Answer
+from app.src.posts.get_text_from_audio import get_text
+from app.src.posts.schemas import Question, Answer, Audio
 from app.src.posts.get_answer import get_answer
 
 app = FastAPI()
@@ -24,6 +25,11 @@ chatbot = Chatbot(config={"email": str(os.getenv("email")), "password": str(os.g
 @app.post("/clickGPT")
 async def ask(question: Question, token: str = Depends(oauth2_scheme)):
     return Answer(message=get_answer(chatbot, question.question))
+
+
+@app.post("/sendAudio")
+async def get_file(encoding: Audio, token: str = Depends(oauth2_scheme)):
+    return Answer(message=get_answer(chatbot, get_text(encoding)))
 
 
 @app.post("/token", response_model=Token)

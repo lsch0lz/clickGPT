@@ -7,3 +7,7 @@ class Question(BaseModel):
 
 class Answer(BaseModel):
     message: str
+
+
+class Audio(BaseModel):
+    encoding: str
