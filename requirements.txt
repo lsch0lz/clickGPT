@@ -3,6 +3,7 @@ revChatGPT==2.3.5
 pydantic==1.10.5
 uvicorn==0.20.0
 fastapi==0.92.0
+SpeechRecognition==3.9.0
 
 # AUTHENTICATION
 python-multipart==0.0.5
